@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
 
   # Roles End
 
-  def influence_points
+  def comments_count
     result = 0
     if comments.empty?
       result = 0
@@ -46,8 +46,13 @@ class User < ActiveRecord::Base
       if admin?
         result =  0
       else
-       result = comments.each(&:count_articles)
+        sum = 0
+        result = articles.each do |article|
+          sum = sum + article.comments.size
+        end
+        result = sum
       end
+      return result
     end
   end
 

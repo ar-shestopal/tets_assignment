@@ -1,6 +1,4 @@
 class User < ActiveRecord::Base
-  include UserRoles
-
   has_many :articles
   has_many :comments
 
